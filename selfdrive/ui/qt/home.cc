@@ -21,6 +21,7 @@ HomeWindow::HomeWindow(QWidget* parent) : QWidget(parent) {
 
   home = new OffroadHome(this);
   QObject::connect(home, &OffroadHome::openSettings, this, &HomeWindow::openSettings);
+  QObject::connect(home, &OffroadHome::toggleDashcam, this, &HomeWindow::toggleDashcam);
   slayout->addWidget(home);
 
   onroad = new OnroadWindow(this);
@@ -38,6 +39,15 @@ HomeWindow::HomeWindow(QWidget* parent) : QWidget(parent) {
   QObject::connect(uiState(), &UIState::uiUpdate, this, &HomeWindow::updateState);
   QObject::connect(uiState(), &UIState::offroadTransition, this, &HomeWindow::offroadTransition);
   QObject::connect(uiState(), &UIState::offroadTransition, sidebar, &Sidebar::offroadTransition);
+}
+
+void HomeWindow::toggleDashcam(){
+  MessageBuilder msg;
+  printf("Toggle dashcam\n");
+  this->enableDashcam = !this->enableDashcam;
+  auto cr0 = msg.initEvent().initCustomReserved10();
+  cr0.setDashcamEnable(this->enableDashcam);
+  uiState()->pm->send("customReserved0", msg);
 }
 
 void HomeWindow::showSidebar(bool show) {

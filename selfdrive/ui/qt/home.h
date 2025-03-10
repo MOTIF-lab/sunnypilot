@@ -43,6 +43,7 @@ public slots:
   void offroadTransition(bool offroad);
   void showDriverView(bool show);
   void showSidebar(bool show);
+  void toggleDashcam();
 
 protected:
   void mousePressEvent(QMouseEvent* e) override;
@@ -57,4 +58,6 @@ protected:
 
 protected slots:
   virtual void updateState(const UIState &s);
+  bool enableDashcam;
+
 };

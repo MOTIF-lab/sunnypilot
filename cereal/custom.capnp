@@ -156,6 +156,7 @@ struct CustomReserved9 @0xa1680744031fdb2d {
 }
 
 struct CustomReserved10 @0xcb9fd56c7057593a {
+  dashcamEnable @0 :Bool;
 }
 
 struct CustomReserved11 @0xc2243c65e0340384 {
