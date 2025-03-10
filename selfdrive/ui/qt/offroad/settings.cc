@@ -15,7 +15,6 @@
 #include "selfdrive/ui/qt/widgets/scrollview.h"
 #include "selfdrive/ui/qt/offroad/developer_panel.h"
 #include "selfdrive/ui/qt/offroad/firehose.h"
-#include "selfdrive/ui/qt/home.h"
 
 TogglesPanel::TogglesPanel(SettingsWindow *parent) : ListWidget(parent) {
   // param, title, desc, icon

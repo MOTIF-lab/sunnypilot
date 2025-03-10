@@ -36,6 +36,7 @@ public:
 
   signals:
     void openSettings(int index = 0, const QString &param = "");
+    void toggleDashcam();
 
 protected:
   QHBoxLayout *home_layout;
@@ -54,4 +55,6 @@ private:
   OffroadAlert* alerts_widget;
   QPushButton* alert_notif;
   QPushButton* update_notif;
+
+  bool enableDashcam;
 };

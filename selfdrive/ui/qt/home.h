@@ -34,6 +34,7 @@ class HomeWindow : public QWidget {
 
 public:
   explicit HomeWindow(QWidget* parent = 0);
+  bool enableDashcam;
 
 signals:
   void openSettings(int index = 0, const QString &param = "");
@@ -58,6 +59,5 @@ protected:
 
 protected slots:
   virtual void updateState(const UIState &s);
-  bool enableDashcam;
 
 };

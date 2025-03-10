@@ -47,7 +47,7 @@ void HomeWindow::toggleDashcam(){
   this->enableDashcam = !this->enableDashcam;
   auto cr0 = msg.initEvent().initCustomReserved10();
   cr0.setDashcamEnable(this->enableDashcam);
-  uiState()->pm->send("customReserved0", msg);
+  uiState()->pm->send("customReserved10", msg);
 }
 
 void HomeWindow::showSidebar(bool show) {

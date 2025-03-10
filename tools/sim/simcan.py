@@ -45,7 +45,7 @@ class SimulatedCarCan:
     self.simulator_state.ignition = False
     self.started = Value('i', False)
 
-    self.sm = messaging.SubMaster(['gpsLocation', 'customReserved0'])
+    self.sm = messaging.SubMaster(['gpsLocation', 'customReserved10'])
 
     self.test_run = False
 
@@ -98,12 +98,11 @@ Ignition: {self.simulator_state.ignition} Engaged: {self.simulator_state.is_enga
         msg = self.sm['gpsLocation']
         if msg.hasFix:
           self.simulator_state.velocity = vec3(msg.vNED[0],msg.vNED[1],msg.vNED[2])
-          print("GPS fixed")
         else:
           print("No GPS fix, no speed")
 
-      if self.sm.updated['customReserved0']:
-        msg = self.sm['customReserved0']
+      if self.sm.updated['customReserved10']:
+        msg = self.sm['customReserved10']
         self.simulator_state.ignition = msg.dashcamEnable
 
       # Read manual controls

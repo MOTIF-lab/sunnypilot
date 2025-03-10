@@ -109,7 +109,7 @@ UIState::UIState(QObject *parent) : QObject(parent) {
     "wideRoadCameraState", "managerState", "selfdriveState", "longitudinalPlan",
   });
   pm = std::make_unique<PubMaster>(std::vector<const char*> {
-    "customReserved0"
+    "customReserved10"
   });
   prime_state = new PrimeState(this);
   language = QString::fromStdString(Params().get("LanguageSetting"));

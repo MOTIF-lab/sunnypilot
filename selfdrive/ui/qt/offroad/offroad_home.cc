@@ -10,6 +10,7 @@
 #include "selfdrive/ui/qt/offroad/experimental_mode.h"
 #include "selfdrive/ui/qt/util.h"
 #include "selfdrive/ui/qt/widgets/prime.h"
+#include "selfdrive/ui/qt/offroad/dashcam_mode.h"
 
 // OffroadHome: the offroad home page
 
@@ -82,6 +83,10 @@ OffroadHome::OffroadHome(QWidget* parent) : QFrame(parent) {
     ExperimentalModeButton *experimental_mode = new ExperimentalModeButton(this);
     QObject::connect(experimental_mode, &ExperimentalModeButton::openSettings, this, &OffroadHome::openSettings);
     right_column->addWidget(experimental_mode, 1);
+
+    DashcamModeButton *dashcam_button = new DashcamModeButton(this);
+    QObject::connect(dashcam_button, &DashcamModeButton::toggleDashcam, this, &OffroadHome::toggleDashcam);
+    right_column->addWidget(dashcam_button,1);
 
     SetupWidget *setup_widget = new SetupWidget;
     QObject::connect(setup_widget, &SetupWidget::openSettings, this, &OffroadHome::openSettings);
