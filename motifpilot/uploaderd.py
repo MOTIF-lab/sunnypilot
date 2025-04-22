@@ -27,7 +27,7 @@ class DatasetUploader(OPUploader):
       'ecamera.hevc': 4,
       'dcamera.hevc': 6,
     })
-    self.upload_attr_name, self.upload_attr_value = 'motif.upload', b'1'
+    self.upload_attr_name, self.upload_attr_value = 'user.motif.upload', b'1'
 
 
 def main(exit_event: threading.Event = None) -> None:
