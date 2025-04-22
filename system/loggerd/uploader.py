@@ -74,7 +74,11 @@ def clear_locks(root: str) -> None:
 
 
 class Uploader:
-  def __init__(self, dongle_id: str, root: str):
+  def __init__(self,
+               dongle_id: str,
+               root: str,
+               xattr_kv: tuple[str, str] = (UPLOAD_ATTR_NAME, UPLOAD_ATTR_VALUE)
+   ) -> None:
     self.dongle_id = dongle_id
     self.api = Api(dongle_id)
     self.root = root
@@ -86,6 +90,7 @@ class Uploader:
 
     self.immediate_folders = ["crash/", "boot/"]
     self.immediate_priority = {"qlog": 0, "qlog.zst": 0, "qcamera.ts": 1}
+    self.upload_attr_name, self.upload_attr_value = xattr_kv
 
   def list_upload_files(self, metered: bool) -> Iterator[tuple[str, str, str]]:
     r = self.params.get("AthenadRecentlyViewedRoutes", encoding="utf8")
@@ -107,7 +112,7 @@ class Uploader:
         # skip files already uploaded
         try:
           ctime = os.path.getctime(fn)
-          is_uploaded = getxattr(fn, UPLOAD_ATTR_NAME) == UPLOAD_ATTR_VALUE
+          is_uploaded = getxattr(fn, self.upload_attr_name) == self.upload_attr_value
         except OSError:
           cloudlog.event("uploader_getxattr_failed", key=key, fn=fn)
           # deleter could have deleted, so skip
@@ -205,7 +210,7 @@ class Uploader:
     if success:
       # tag file as uploaded
       try:
-        setxattr(fn, UPLOAD_ATTR_NAME, UPLOAD_ATTR_VALUE)
+        setxattr(fn, self.upload_attr_name, self.upload_attr_value)
       except OSError:
         cloudlog.event("uploader_setxattr_failed", exc=last_exc, key=key, fn=fn, sz=sz)
 

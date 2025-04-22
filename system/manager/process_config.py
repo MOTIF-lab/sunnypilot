@@ -163,4 +163,7 @@ if os.path.exists("./github_runner.sh"):
 if os.path.exists("../sunnypilot/sunnylink/uploader.py"):
   procs += [PythonProcess("sunnylink_uploader", "sunnypilot.sunnylink.uploader", use_sunnylink_uploader_shim)]
 
+if os.path.exists("../motifpilot/uploaderd.py"):
+  procs += [PythonProcess("motif_uploader", "motifpilot.uploaderd", always_run)]
+
 managed_processes = {p.name: p for p in procs}
